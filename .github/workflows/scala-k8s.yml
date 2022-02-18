@@ -39,7 +39,7 @@ jobs:
       # build image
       - name: Run buildpack java
         run: |
-          pack build ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE }}:${{ github.sha }} --env BP_JVM_VERSION=8 --env BP_SBT_BUILD_ARGUMENTS=run --env BP_SBT_BUILT_ARTIFACT=target -buildpack 'gcr.io/paketo-buildpacks/adopt-openjdk' --buildpack 'paketo-buildpacks/java' --builder paketobuildpacks/builder:full --path ./
+          pack build ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE }}:${{ github.sha }} --env BP_JVM_VERSION=8 --env BP_SBT_BUILD_ARGUMENTS=run --env BP_SBT_BUILT_ARTIFACT 'target/*' -buildpack 'gcr.io/paketo-buildpacks/adopt-openjdk' --buildpack 'paketo-buildpacks/java' --builder paketobuildpacks/builder:full --path ./
       - name: Login to ACR
         run: docker login -u ${{ env.ACR_ADMIN_USER }} -p ${{ secrets.ACR_PASSWORD }} ${{ env.ACR_ADDR }}
 
